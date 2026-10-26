@@ -78,7 +78,8 @@ executar_builder() {
   fi
 
   chmod +x "${script}"
-  USE_KERNELSU="\( {usar_kernelsu}" ./" \){script}"
+  USE_KERNELSU="${usar_kernelsu}" ./"${script}"
+
 }
 
 # ---------------------------------------------------------------------------
