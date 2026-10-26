@@ -19,26 +19,32 @@ set -euo pipefail
 #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
+
 HERE="$(pwd)/"
 
 path() {
-  echo "What is written above \"Extract Proparytery blobls\""
-read -rp "Please,write here:" PASTA
+  echo "What is written above \"Extract proprietary blobs\""
+read -rp "Please, write here:" PASTA
 }
 
 ask_zip() {
-  echo "Please,Download the .zip installer"
-echo "Where the file is?"
-echo "Ex:/home/myuser/Lineage_something23.zip"
-read -rp "Write here:" ZIP 
+  echo "Please download the .zip installer"
+echo "Where is the file?"
+echo "Example: /home/myuser/Lineage_something23.zip"
+read -rp "Paste the path here:" ZIP 
 }
 
+read -rp "Enter your GitHub email (used for cloning): " EMAIL 
+read -rp "Enter your Git name (can be anything): " NAME 
+
+read -rp "Do you want to enable KernelSU? (y/N): " -n 1 -r; echo; [[ $REPLY =~ ^[Yy]$ ]] && USE_KERNELSU=true || USE_KERNELSU=false
+
 ASK(){
-echo "On the compilation steps,there is one command called breakfast YourDevice,what is there"
-echo "Like rosymary,nx_tab"
-read -rp "What was written there?: " CODENOME
+echo "In the compilation steps, there is one command called breakfast YourDevice; what is that?"
+echo "Like rosemary,nx_tab"
+read -rp "What was written there?: " CODENAME
 clear
-echo "This will take a while,so take a nap,take a coffe or something"
+echo "This will take a while, so take a nap, have a coffee or something"
 sleep 3
 }
 
@@ -46,6 +52,7 @@ CORES=$(( $(nproc) - 2 ))
 (( CORES < 1 )) && CORES=1
 
 # Installs packges
+echo "This will ask for sudo so that it can install the required tools"
 sudo apt update
 sudo apt install -y bc bison build-essential \
 ccache curl flex g++-multilib gcc-multilib git \
@@ -67,9 +74,6 @@ clear
 # Use ccache
 export USE_CCACHE=1
 export CCACHE_EXEC=/usr/bin/ccache 
-# Asks Email and name
-read -rp "What is ur email of the github,is for cloning?" EMAIL 
-read -rp "And ur name,it can be anything?" NAME 
 clear
 git config --global user.email "$EMAIL"
 git config --global user.name "$NAME"
@@ -86,8 +90,8 @@ clear
 # Downaload more things
 ASK
 source build/envsetup.sh
-while ! breakfast "$CODENOME"; do
-    echo "Error: $CODENOME dont exist or is unsupported"
+while ! breakfast "$CODENAME"; do
+    echo "Error: $CODENAME does not exist or is unsupported."
     ASK
 done
 ask_zip
@@ -99,7 +103,7 @@ done
 
 path
 while [[ ! -d "$PASTA" ]]; do
-echo "Wrong path!!"
+echo "Wrong path!"
 path
 done
 # Extarct files
@@ -109,7 +113,7 @@ if [[ -f "./extract-files.sh" ]]; then
 elif [[ -f ./extract-files.py ]]; then
    ./extract-files.py "$ZIP"
   else
-  echo "Impprtant file not found!!"
+  echo "Important file not found!"
   exit 1
   fi
 # Builds
@@ -117,19 +121,19 @@ croot
 clear
    if [[ "$USE_KERNELSU" == true ]]; then
 cd "$HERE"
-git clone https://github.com/Dudu-gsh/KernelSU_moddifyd.git
-cd KernelSU_moddifyd
+git clone https://github.com/EduuTech/KernelSU
+cd KernelSU
 chmod +x kernel/setup.sh
 cd ~/android/lineage/
-cd "$(find kernel -type d -name "$CODENOME").."
-"$HERE"KernelSU_moddifyd/kernel/setup.sh
+cd "$(find kernel -type d -name "$CODENAME").."
+"$HERE"KernelSU/kernel/setup.sh
 croot
    fi
 read -rp "Want to compile a Signed Build (Y/N)" SIGNED
    if [[ $SIGNED =~ ^[Yy]$ ]]; then 
 cd "$HERE"
-chmod +x sign_please
+chmod +x sign_pls.sh
 ./sign_pls.sh "$EMAIL"
 
    else
-brunch "$CODENOME"
+mka bacon "$CODENAME"
