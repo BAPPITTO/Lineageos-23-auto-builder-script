@@ -200,15 +200,6 @@ main() {
   read -rp "Digite seu e-mail do GitHub (usado para clonar): " EMAIL
   read -rp "Digite seu nome no Git (pode ser qualquer coisa): " NAME
 
-  # KernelSU opcional
-  read -rp "Deseja habilitar o KernelSU? (s/N): " -n 1 -r
-  echo
-  if [[ \( {REPLY} =\~ ^[SsYy] \) ]]; then
-    USE_KERNELSU=true
-  else
-    USE_KERNELSU=false
-  fi
-
   # Codinome do dispositivo (necessário depois para breakfast / KernelSU / build)
   prompt_codename
 
