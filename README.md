@@ -10,7 +10,7 @@
   <a href="https://github.com/EduuTech/Lineageos-23-auto-builder-script/blob/main/LICENSE"><img src="https://img.shields.io/github/license/EduuTech/Lineageos-23-auto-builder-script?style=flat-square" alt="License"></a>
 </p>
 
-[Português-BR](README_PT.md) | [English](README.md)
+[Português-BR](README_PT.md)
 
 </div>
 
