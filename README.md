@@ -45,7 +45,7 @@ cd Lineageos-23-auto-builder-script-main
 ---
 
 ## Recommended System Requirements
-* **OS:** Ubuntu 26.06 or latest Debian (x64). See the [Supported OS List](OS_LIST.md).
+* **OS:** Ubuntu 26.06 or latest Debian (x64). See the [Supported OS List](OS_LIST).
 * **RAM:** 16GB minimum
 * **CPU:** 8 cores
 * **Storage:** 1TB SSD (HDDs work, but expect significantly slower compilation times)
