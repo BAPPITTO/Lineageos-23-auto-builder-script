@@ -4,9 +4,11 @@
 
 # LineageOS 23 Auto Builder Script
 
-[![GitHub stars](https://img.shields.io/github/stars/EduuTech/Lineageos-23-auto-builder-script?style=social)](https://github.com/EduuTech/Lineageos-23-auto-builder-script/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/EduuTech/Lineageos-23-auto-builder-script?style=social)](https://github.com/EduuTech/Lineageos-23-auto-builder-script/network/members)
-[![GitHub license](https://img.shields.io/github/license/EduuTech/Lineageos-23-auto-builder-script)](LICENSE)
+[![GitHub stars]<p align="center">
+  <a href="https://github.com/EduuTech/Lineageos-23-auto-builder-script/stargazers"><img src="https://img.shields.io/github/stars/EduuTech/Lineageos-23-auto-builder-script?style=flat-square&logo=github" alt="GitHub Stars"></a>
+  <a href="https://github.com/EduuTech/Lineageos-23-auto-builder-script/network/members"><img src="https://img.shields.io/github/forks/EduuTech/Lineageos-23-auto-builder-script?style=flat-square&logo=github" alt="GitHub Forks"></a>
+  <a href="https://github.com/EduuTech/Lineageos-23-auto-builder-script/blob/main/LICENSE"><img src="https://img.shields.io/github/license/EduuTech/Lineageos-23-auto-builder-script?style=flat-square" alt="License"></a>
+</p>
 
 [Português-BR](README_PT.md) | [English](README.md)
 
