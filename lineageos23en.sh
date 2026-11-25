@@ -89,7 +89,7 @@ install_dependencies() {
 
 setup_repo_tool() {
   mkdir -p "${HOME}/bin"
-  PATH="\( {HOME}/bin: \){PATH}"
+  PATH="$HOME/bin:$PATH"
   export PATH
 
   curl -fLo "${HOME}/bin/repo" https://storage.googleapis.com/git-repo-downloads/repo
@@ -122,10 +122,21 @@ sync_lineage() {
   clear
 }
 
-run_breakfast() {
-  source build/envsetup.sh
+run_lineage_command() {
+  local status
+  set +u
+  "$@"
+  status=$?
+  set -u
+  return "$status"
+}
 
-  while ! breakfast "${CODENAME}"; do
+run_breakfast() {
+  set +u
+  source build/envsetup.sh
+  set -u
+
+  while ! run_lineage_command breakfast "${CODENAME}"; do
     echo "Error: '${CODENAME}' does not exist or is unsupported."
     prompt_codename
   done
@@ -172,21 +183,21 @@ setup_kernelsu() {
   cd "\( (find kernel -type d -name " \){CODENAME}")/.."
   "${HERE}KernelSU/kernel/setup.sh"
 
-  croot
+  run_lineage_command croot
 }
 
 build_rom() {
-  croot
+  run_lineage_command croot
   clear
 
   read -rp "Want to compile a Signed Build? (Y/N): " SIGNED
 
-  if [[ \( {SIGNED} =\~ ^[Yy] \) ]]; then
+  if [[ ${SIGNED} =~ ^[Yy] ]]; then
     cd "${HERE}"
     chmod +x sign_pls.sh
     ./sign_pls.sh "${EMAIL}"
   else
-    mka bacon "${CODENAME}"
+    run_lineage_command mka bacon "${CODENAME}"
   fi
 }
 

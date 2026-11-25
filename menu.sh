@@ -3,7 +3,7 @@
 # Menu de seleção de idioma + lançador do LineageOS 23 builder
 # =============================================================================
 # Pergunta o idioma (Português / English), pergunta se deseja KernelSU e
-# chama o script correspondente (lineageos23pt.sh ou lineageos23en.sh)
+# chama o script correspondente (build.sh ou lineageos23en.sh)
 # passando a variável de ambiente USE_KERNELSU.
 #
 # MIT License
@@ -96,12 +96,12 @@ main() {
       # ---------- Português ----------
       perguntar_kernelsu_pt
 
-      if [[ \( {KERNELSU} =\~ ^[Ss] \) ]]; then
+      if [[ ${KERNELSU} =~ ^[Ss] ]]; then
         echo "Tá bom."
-        executar_builder "lineageos23pt.sh" "true"
+        executar_builder "build.sh" "true"
       else
         echo "Bem-vindo ao meu LineageOS 23 builder"
-        executar_builder "lineageos23pt.sh" "false"
+        executar_builder "build.sh" "false"
       fi
 
       echo "Agora você tem um build do LineageOS 23"
@@ -111,7 +111,7 @@ main() {
       # ---------- English ----------
       perguntar_kernelsu_en
 
-      if [[ \( {KERNELSU} =\~ ^[Yy] \) ]]; then
+      if [[ ${KERNELSU} =~ ^[Yy] ]]; then
         echo "Okay"
         executar_builder "lineageos23en.sh" "true"
       else
