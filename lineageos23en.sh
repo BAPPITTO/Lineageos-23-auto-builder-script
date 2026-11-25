@@ -138,8 +138,10 @@ run_breakfast() {
 
   while true; do
     unset TARGET_PRODUCT
-    if run_lineage_command breakfast "${CODENAME}" &&
-       [[ ${TARGET_PRODUCT:-} == "lineage_${CODENAME}" ]]; then
+    if run_lineage_command breakfast "${CODENAME}" && {
+      [[ ${TARGET_PRODUCT:-} == "lineage_${CODENAME}" ]] ||
+        compgen -G "device/*/${CODENAME}" >/dev/null
+    }; then
       break
     fi
 
