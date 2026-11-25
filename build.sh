@@ -137,7 +137,15 @@ run_breakfast() {
   source build/envsetup.sh
   set -u
 
-  while ! run_lineage_command breakfast "${CODENAME}"; do
+  while true; do
+    unset TARGET_PRODUCT
+    if run_lineage_command breakfast "${CODENAME}" && {
+      [[ ${TARGET_PRODUCT:-} == "lineage_${CODENAME}" ]] ||
+        compgen -G "device/*/${CODENAME}" >/dev/null
+    }; then
+      break
+    fi
+
     echo "Erro: '${CODENAME}' não existe ou não é suportado."
     prompt_codename
   done
